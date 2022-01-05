@@ -21,8 +21,9 @@
 	# Read user options.
 	for opt in \
 		default dmenu easymode navigate navigator prefix shiftnum \
-		split_vsplit split_only vsplit_split vsplit_only \
-		tiled zoom refresh rename
+		layout_keys \
+		refresh rename \
+		refresh_hooks
 	do
 		export "$opt"="$(tmux show-option -gv @tilish-"$opt" 2>/dev/null)"
 	done
@@ -32,15 +33,21 @@
 	then
 		shiftnum='!@#$%^&*()'
 	fi
+	if [ -z "$layout_keys" ]
+	then
+		layout_keys='sSvVtz'
+	fi
 
-	if [ -z "$split_vsplit" ]; then split_vsplit="s" ; fi
-	if [ -z "$split_only"   ]; then split_only="S"   ; fi
-	if [ -z "$vsplit_split" ]; then vsplit_split="v" ; fi
-	if [ -z "$vsplit_only"  ]; then vsplit_only="V"  ; fi
-	if [ -z "$tiled"        ]; then tiled="t"        ; fi
-	if [ -z "$zoom"         ]; then zoom="z"         ; fi
-	if [ -z "$refresh"      ]; then refresh="r"      ; fi
-	if [ -z "$rename"       ]; then rename="n"       ; fi
+	# Resize hooks are enabled by default
+	if [ -z "$refresh_hooks" ]
+	then
+		# First one is the 'after-split-window' hook
+		# Second one is the 'pane-exited' hook
+		refresh_hooks='yy'
+	fi
+
+	if [ -z "$refresh" ]; then refresh="r"; fi
+	if [ -z "$rename"  ]; then rename="n" ; fi
 
 	# Determine "arrow types".
 	if [ "${easymode:-}" = "on" ]
@@ -164,12 +171,12 @@ fi
 # The keys can be overridden, but the default mnemonics are
 # `s` and `S` for layouts Vim would generate with `:split`, and `v` and `V` for `:vsplit`.
 # The remaining mappings based on `z` and `t` should be quite obvious.
-bind_layout "${mod}${split_vsplit}" 'main-horizontal'
-bind_layout "${mod}${split_only}" 'even-vertical'
-bind_layout "${mod}${vsplit_split}" 'main-vertical'
-bind_layout "${mod}${vsplit_only}" 'even-horizontal'
-bind_layout "${mod}${tiled}" 'tiled'
-bind_layout "${mod}${zoom}" 'zoom'
+bind_layout "${mod}$(char_at $layout_keys 1)" 'main-horizontal'
+bind_layout "${mod}$(char_at $layout_keys 2)" 'even-vertical'
+bind_layout "${mod}$(char_at $layout_keys 3)" 'main-vertical'
+bind_layout "${mod}$(char_at $layout_keys 4)" 'even-horizontal'
+bind_layout "${mod}$(char_at $layout_keys 5)" 'tiled'
+bind_layout "${mod}$(char_at $layout_keys 6)" 'zoom'
 
 # Refresh the current layout (e.g. after deleting a pane).
 if [ -z "$legacy" ]
@@ -243,8 +250,15 @@ tmux $bind "${mod}C" \
 if [ -z "$legacy" ]
 then
 	# Autorefresh layout after deleting a pane.
-	tmux set-hook -g after-split-window "select-layout; select-layout -E"
-	tmux set-hook -g pane-exited "select-layout; select-layout -E"
+	if [ "$(char_at $refresh_hooks 1)" = 'y' ]
+	then
+		tmux set-hook -g after-split-window "select-layout; select-layout -E"
+	fi
+
+	if [ "$(char_at $refresh_hooks 2)" = 'y' ]
+	then
+		tmux set-hook -g pane-exited "select-layout; select-layout -E"
+	fi
 
 	# Autoselect layout after creating new window.
 	if [ -n "${default:-}" ]
