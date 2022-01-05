@@ -53,7 +53,7 @@ The easiest way to install this plugin is via the [Tmux Plugin Manager][2].
 Just add the following to `~/.tmux.conf`, then press <kbd>Ctrl</kbd> + <kbd>b</kbd>
 followed by <kbd>Shift</kbd> + <kbd>i</kbd> to install it (assuming default prefix key):
 
-	set -g @plugin 'jabirali/tmux-tilish'
+	set -g @plugin 'farzadmf/tmux-tilish'
 
 For `tmux` v2.7+, you can customize which layout is used as default for new workspaces.
 To do so, add this to `~/.tmux.conf`:
