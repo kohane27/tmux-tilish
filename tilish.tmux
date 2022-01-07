@@ -14,64 +14,6 @@
 # shellcheck disable=SC2086
 # shellcheck disable=SC2250
 
-# Check input parameters {{{
-	# Whether we need to use legacy workarounds (required before tmux 2.7).
-	legacy="$(tmux -V | grep -E 'tmux (1\.|2\.[0-6])')"
-
-	# Read user options.
-	for opt in \
-		default dmenu easymode navigate navigator prefix shiftnum \
-		layout_keys \
-		refresh rename \
-		refresh_hooks
-	do
-		export "$opt"="$(tmux show-option -gv @tilish-"$opt" 2>/dev/null)"
-	done
-
-	# Default to US keyboard layout, unless something is configured.
-	if [ -z "$shiftnum" ]
-	then
-		shiftnum='!@#$%^&*()'
-	fi
-	if [ -z "$layout_keys" ]
-	then
-		layout_keys='sSvVtz'
-	fi
-
-	# Resize hooks are enabled by default
-	if [ -z "$refresh_hooks" ]
-	then
-		# First one is the 'after-split-window' hook
-		# Second one is the 'pane-exited' hook
-		refresh_hooks='yy'
-	fi
-
-	if [ -z "$refresh" ]; then refresh="r"; fi
-	if [ -z "$rename"  ]; then rename="n" ; fi
-
-	# Determine "arrow types".
-	if [ "${easymode:-}" = "on" ]
-	then
-		# Simplified arrows.
-		h='left';   j='down';   k='up';   l='right';
-		H='S-left'; J='S-down'; K='S-up'; L='S-right';
-	else
-		# Vim-style arrows.
-		h='h'; j='j'; k='k'; l='l';
-		H='H'; J='J'; K='K'; L='L';
-	fi
-
-	# Determine modifier vs. prefix key.
-	if [ -z "${prefix:-}" ]
-	then
-		bind='bind -n'
-		mod='M-'
-	else
-		bind='bind -rT tilish'
-		mod=''
-	fi
-# }}}
-
 # Define core functionality {{{
 bind_switch () {
 	# Bind keys to switch between workspaces.
@@ -125,6 +67,72 @@ char_at () {
 	# a string in a way compatible with POSIX sh.
 	echo $1 | cut -c $2
 }
+# }}}
+
+# Check input parameters {{{
+	# Whether we need to use legacy workarounds (required before tmux 2.7).
+	legacy="$(tmux -V | grep -E 'tmux (1\.|2\.[0-6])')"
+
+	# Read user options.
+	for opt in \
+		default dmenu easymode navigate navigator prefix shiftnum \
+		layout_keys \
+		refresh rename \
+		refresh_hooks
+	do
+		export "$opt"="$(tmux show-option -gv @tilish-"$opt" 2>/dev/null)"
+	done
+
+	# Default to US keyboard layout, unless something is configured.
+	if [ -z "$shiftnum" ]
+	then
+		shiftnum='!@#$%^&*()'
+	fi
+	if [ -z "$layout_keys" ]
+	then
+		layout_keys='sSvVtz'
+	fi
+
+	# Resize hooks are enabled by default
+	if [ -z "$refresh_hooks" ]
+	then
+		# First one is the 'after-split-window' hook
+		# Second one is the 'pane-exited' hook
+		refresh_hooks='yy'
+	fi
+
+	if [ -z "$refresh"  ]; then refresh="r"   ; fi
+	if [ -z "$rename"   ]; then rename="n"    ; fi
+	if [ -z "$easymode" ]; then easymode="nn" ; fi
+
+	# Determine "arrow types" for pane focus.
+	if [ "$(char_at $easymode 1)" = "y" ]
+	then
+		# Simplified arrows.
+		h='left'; j='down'; k='up'; l='right';
+	else
+		# Vim-style arrows.
+		h='h'; j='j'; k='k'; l='l';
+	fi
+	# Determine "arrow types" for pane movement.
+	if [ "$(char_at $easymode 2)" = "y" ]
+	then
+		# Simplified arrows.
+		H='S-left'; J='S-down'; K='S-up'; L='S-right';
+	else
+		# Vim-style arrows.
+		H='H'; J='J'; K='K'; L='L';
+	fi
+
+	# Determine modifier vs. prefix key.
+	if [ -z "${prefix:-}" ]
+	then
+		bind='bind -n'
+		mod='M-'
+	else
+		bind='bind -rT tilish'
+		mod=''
+	fi
 # }}}
 
 # Define keybindings {{{

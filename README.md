@@ -180,16 +180,33 @@ to use <kbd>i</kbd> and <kbd>I</kbd> instead of <kbd>v</kbd> and <kbd>V</kbd>, r
 To make the plugin more accessible for people who do not use `vim` as well,
 there is also an "easy mode" available, which uses arrow keys instead of
 the `vim`-style <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> keys.
-This mode can be activated by putting this in your `.tmux.conf`:
 
-	set -g @tilish-easymode 'on'
+There's a setting called `tilish_easymode`, consisting of two characters that enables/disables
+the "easy mode" for pane focus/movment.
 
-The revised keybindings for the pane focus and movement then become:
+The default value is `'nn'`, which means to use vim-style keybindings for both focus and movement:
+- The first character corresponds to pane focus.
+- The second character corresponds to pane movement.
+
+For example, by doing this in `.tmux.conf`:
+
+	set -g @tilish-easymode 'ny'
+
+we can enable the "easy mode" only for pane movement, which means the revised keybindings for the pane movement then become:
+
+| Keybinding | Description |
+| ---------- | ----------- |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>&#8592;</kbd><kbd>&#8595;</kbd><kbd>&#8593;</kbd><kbd>&#8594;</kbd> | Move pane left/down/up/right |
+
+Or by doing this:
+
+	set -g @tilish-easymode 'yn'
+
+will enable arrows for pane focus. The revised keybindings for the pane focus then become:
 
 | Keybinding | Description |
 | ---------- | ----------- |
 | <kbd>Alt</kbd> + <kbd>&#8592;</kbd><kbd>&#8595;</kbd><kbd>&#8593;</kbd><kbd>&#8594;</kbd> | Move focus left/down/up/right |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>&#8592;</kbd><kbd>&#8595;</kbd><kbd>&#8593;</kbd><kbd>&#8594;</kbd> | Move pane left/down/up/right |
 
 ## Prefix mode
 Note that this feature is currently only available in `tmux` v2.4+.
