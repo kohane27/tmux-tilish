@@ -1,3 +1,28 @@
+Table of Contents
+=================
+
+<details>
+   <summary>Click to expand</summary>
+
+   * [Tmux Tilish](#tmux-tilish)
+      * [Changes in this fork:](#changes-in-this-fork)
+      * [Why?](#why)
+      * [Quickstart](#quickstart)
+      * [Keybindings](#keybindings)
+         * [Auto-refresh hooks](#auto-refresh-hooks)
+         * [Layout keys](#layout-keys)
+      * [Easy mode](#easy-mode)
+      * [Prefix mode](#prefix-mode)
+      * [Application launcher](#application-launcher)
+      * [Terminal compatibility](#terminal-compatibility)
+      * [Usage inside i3wm](#usage-inside-i3wm)
+      * [Integration with vim](#integration-with-vim)
+         * [Navigate](#navigate)
+         * [Navigator](#navigator)
+   * [Related projects](#related-projects)
+
+</details>
+
 # Tmux Tilish
 
 ## Changes in this fork:
