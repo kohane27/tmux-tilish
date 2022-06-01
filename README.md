@@ -134,24 +134,24 @@ while a "pane" is what `i3wm` would call a "window" and `vim` would call a "spli
 
 NOTE: a bunch of the following keys can be overridden through the options (see below).
 
-| Keybinding | Description |
-| ---------- | ----------- |
-| <kbd>Alt</kbd> + <kbd>0</kbd>-<kbd>9</kbd> | Switch to workspace number 0-9 |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>0</kbd>-<kbd>9</kbd> | Move pane to workspace 0-9 |
-| <kbd>Alt</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> | Move focus left/down/up/right |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> | Move pane left/down/up/right |
-| <kbd>Alt</kbd> + <kbd>Enter</kbd> | Create a new pane at "the end" of the current layout |
-| <kbd>Alt</kbd> + <kbd>s</kbd> | Switch to layout: split then vsplit |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>s</kbd> | Switch to layout: only split |
-| <kbd>Alt</kbd> + <kbd>v</kbd> | Switch to layout: vsplit then split |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>v</kbd> | Switch to layout: only vsplit |
-| <kbd>Alt</kbd> + <kbd>t</kbd> | Switch to layout: fully tiled |
-| <kbd>Alt</kbd> + <kbd>z</kbd> | Switch to layout: zoom (fullscreen) |
-| <kbd>Alt</kbd> + <kbd>r</kbd> | Refresh current layout |
-| <kbd>Alt</kbd> + <kbd>n</kbd> | Name current workspace |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>q</kbd> | Quit (close) pane |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>e</kbd> | Exit (detach) `tmux` |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>c</kbd> | Reload config |
+| Keybinding                                                                           | Description                                          |
+| ----------                                                                           | -----------                                          |
+| <kbd>Alt</kbd> + <kbd>0</kbd>-<kbd>9</kbd>                                           | Switch to workspace number 0-9                       |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>0</kbd>-<kbd>9</kbd>                        | Move pane to workspace 0-9                           |
+| <kbd>Alt</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd>                    | Move focus left/down/up/right                        |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> | Move pane left/down/up/right                         |
+| <kbd>Alt</kbd> + <kbd>Enter</kbd>                                                    | Create a new pane at "the end" of the current layout |
+| <kbd>Alt</kbd> + <kbd>s</kbd>                                                        | Switch to layout: split then vsplit                  |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>s</kbd>                                     | Switch to layout: only split                         |
+| <kbd>Alt</kbd> + <kbd>v</kbd>                                                        | Switch to layout: vsplit then split                  |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>v</kbd>                                     | Switch to layout: only vsplit                        |
+| <kbd>Alt</kbd> + <kbd>t</kbd>                                                        | Switch to layout: fully tiled                        |
+| <kbd>Alt</kbd> + <kbd>z</kbd>                                                        | Switch to layout: zoom (fullscreen)                  |
+| <kbd>Alt</kbd> + <kbd>r</kbd>                                                        | Refresh current layout                               |
+| <kbd>Alt</kbd> + <kbd>n</kbd>                                                        | Name current workspace                               |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>q</kbd>                                     | Quit (close) pane                                    |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>e</kbd>                                     | Exit (detach) `tmux`                                 |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>c</kbd>                                     | Reload config                                        |
 
 The <kbd>Alt</kbd> + <kbd>0</kbd> and <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>0</kbd>
 bindings are "smart": depending on `base-index`, they either act on workspace 0 or 10.
@@ -219,8 +219,8 @@ For example, by doing this in `.tmux.conf`:
 
 we can enable the "easy mode" only for pane movement, which means the revised keybindings for the pane movement then become:
 
-| Keybinding | Description |
-| ---------- | ----------- |
+| Keybinding                                                                                                   | Description                  |
+| ----------                                                                                                   | -----------                  |
 | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>&#8592;</kbd><kbd>&#8595;</kbd><kbd>&#8593;</kbd><kbd>&#8594;</kbd> | Move pane left/down/up/right |
 
 Or by doing this:
@@ -229,8 +229,8 @@ Or by doing this:
 
 will enable arrows for pane focus. The revised keybindings for the pane focus then become:
 
-| Keybinding | Description |
-| ---------- | ----------- |
+| Keybinding                                                                                | Description                   |
+| ----------                                                                                | -----------                   |
 | <kbd>Alt</kbd> + <kbd>&#8592;</kbd><kbd>&#8595;</kbd><kbd>&#8593;</kbd><kbd>&#8594;</kbd> | Move focus left/down/up/right |
 
 ## Prefix mode
