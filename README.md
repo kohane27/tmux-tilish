@@ -161,6 +161,10 @@ set, the default value will be used):
 - `set -g @tilish-refresh "..."` (default <kbd>r</kbd>)
 - `set -g @tilish-rename "..."` (default <kbd>n</kbd>)
 
+*NOTE*: the `rename` option can be disabled if set to `---` like this:
+
+	set -g @tilish-rename '---'
+
 The keybindings that move panes between workspaces assume a US keyboard layout.
 However, you can configure `tilish` for international keyboards by providing a string
 `@tilish-shiftnum` prepared by pressing <kbd>Shift</kbd> +
@@ -338,7 +342,7 @@ Thus a full working minimal example of a `tpm`-based `tmux.conf` would be:
 	# List of plugins.
 	set -g @plugin 'tmux-plugins/tpm'
 	set -g @plugin 'tmux-plugins/tmux-sensible'
-	set -g @plugin 'jabirali/tmux-tilish'
+	set -g @plugin 'farzadmf/tmux-tilish'
 	set -g @plugin 'sunaku/tmux-navigate'
 
 	# Plugin options.

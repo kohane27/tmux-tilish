@@ -101,9 +101,9 @@ char_at () {
 		refresh_hooks='yy'
 	fi
 
-	if [ -z "$refresh"  ]; then refresh="r"   ; fi
-	if [ -z "$rename"   ]; then rename="n"    ; fi
-	if [ -z "$easymode" ]; then easymode="nn" ; fi
+	if [ -z "$refresh"                      ]; then refresh="r"   ; fi
+	if [ -z "$rename" && "$rename" != '---' ]; then rename="n"    ; fi
+	if [ -z "$easymode"                     ]; then easymode="nn" ; fi
 
 	# Determine "arrow types" for pane focus.
 	if [ "$(char_at $easymode 1)" = "y" ]
