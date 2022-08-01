@@ -102,8 +102,10 @@ char_at () {
 	fi
 
 	if [ -z "$refresh"                      ]; then refresh="r"   ; fi
-	if [ -z "$rename" && "$rename" != '---' ]; then rename="n"    ; fi
 	if [ -z "$easymode"                     ]; then easymode="nn" ; fi
+
+	if   [ -z "$rename"      ]; then rename="n" ;
+	elif [ "$rename" = '---' ]; then rename=''  ; fi
 
 	# Determine "arrow types" for pane focus.
 	if [ "$(char_at $easymode 1)" = "y" ]
@@ -228,8 +230,12 @@ else
 fi
 
 # Name a window with Alt + n (or the key set through the options)
-tmux $bind "${mod}${rename}" \
-	command-prompt -p 'Workspace name:' 'rename-window "%%"'
+# Will be disabled if set to '---'
+if [ -n "$rename" ]
+then
+	tmux $bind "${mod}${rename}" \
+		command-prompt -p 'Window name:' 'rename-window "%%"'
+fi
 
 # Close a window with Alt + Shift + q.
 if [ -z "$legacy" ]

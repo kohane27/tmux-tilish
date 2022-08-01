@@ -148,9 +148,9 @@ NOTE: a bunch of the following keys can be overridden through the options (see b
 | <kbd>Alt</kbd> + <kbd>t</kbd>                                                        | Switch to layout: fully tiled                        |
 | <kbd>Alt</kbd> + <kbd>z</kbd>                                                        | Switch to layout: zoom (fullscreen)                  |
 | <kbd>Alt</kbd> + <kbd>r</kbd>                                                        | Refresh current layout                               |
-| <kbd>Alt</kbd> + <kbd>n</kbd>                                                        | Name current workspace                               |
+| <kbd>Alt</kbd> + <kbd>n</kbd>                                                        | Name/rename current window                           |
 | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>q</kbd>                                     | Quit (close) pane                                    |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>e</kbd>                                     | Exit (detach) `tmux`                                 |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>e</kbd>                                     | Exit (detach) `tmux`                                   |
 | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>c</kbd>                                     | Reload config                                        |
 
 The <kbd>Alt</kbd> + <kbd>0</kbd> and <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>0</kbd>
