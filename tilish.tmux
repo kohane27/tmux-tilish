@@ -79,7 +79,9 @@ char_at () {
 
 	# Read user options.
 	for opt in \
-		default dmenu easymode navigate navigator prefix shiftnum \
+		default dmenu easymode prefix shiftnum \
+		navigate navigator \
+		smart_splits smart_splits_dirs \
 		layout_keys \
 		refresh rename \
 		refresh_hooks
@@ -289,6 +291,8 @@ fi
 # }}}
 
 # Integrate with Vim for transparent navigation {{{
+is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+
 if [ "${navigate:-}" = "on" ]
 then
 	# If `@tilish-navigate` is nonzero, integrate Alt + hjkl with `tmux-navigate`.
@@ -300,7 +304,6 @@ elif [ "${navigator:-}" = "on" ]
 then
 	# If `@tilish-navigator` is nonzero, integrate Alt + hjkl with `vim-tmux-navigator`.
 	# This assumes that your Vim/Neovim is setup to use Alt + hjkl bindings as well.
-	is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
 
 	tmux $bind "${mod}${h}" if-shell "$is_vim" 'send M-h' 'select-pane -L'
 	tmux $bind "${mod}${j}" if-shell "$is_vim" 'send M-j' 'select-pane -D'
@@ -314,6 +317,24 @@ then
 		tmux bind -T copy-mode-vi "M-$k" select-pane -U
 		tmux bind -T copy-mode-vi "M-$l" select-pane -R
 	fi
+fi
+
+if [ "${smart_splits:-}" = "on" ]
+then
+	if [ -z "$smart_splits_dirs" ]
+	then
+		smart_splits_dirs='fvtg'
+	fi
+
+	left=$(char_at $smart_splits_dirs 1)
+  down=$(char_at $smart_splits_dirs 2)
+  up=$(char_at $smart_splits_dirs 3)
+  right=$(char_at $smart_splits_dirs 4)
+
+	tmux $bind "${mod}${left}"  if-shell "$is_vim" "send M-${left}"  'resize-pane -L'
+	tmux $bind "${mod}${down}"  if-shell "$is_vim" "send M-${down}"  'resize-pane -D'
+	tmux $bind "${mod}${up}"    if-shell "$is_vim" "send M-${up}"    'resize-pane -U'
+	tmux $bind "${mod}${right}" if-shell "$is_vim" "send M-${right}" 'resize-pane -R'
 fi
 # }}}
 

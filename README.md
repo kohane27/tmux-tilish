@@ -328,10 +328,13 @@ Alternatively, `tilish` also supports a [Prefix mode](#prefix-mode). This is in 
 less ergonomic than the default `tilish` keybindings. However, it does not require the use
 of <kbd>Alt</kbd>, and is therefore compatible with the default `i3wm` keybindings.
 
-## Integration with vim
+## Integration with [neo]vim
 
-There are two great plugins [tmux-navigate][10] and [vim-tmux-navigator][3],
-which both allow seamless navigation between `vim` splits and `tmux` splits.
+There are plugins such as:
+- [tmux-navigate][10]
+- [vim-tmux-navigator][3]
+- [smart-splits.nvim][4]
+which both allow seamless navigation/resizing between `vim` splits and `tmux` splits.
 The former has an advantage that it also works over `ssh` connections, and that
 it plays better with zooming (<kbd>Alt</kbd>+<kbd>z</kbd>).  If you use either
 plugin, you can tell `tilish` to make it setup the keybindings for you. (If you
@@ -397,7 +400,23 @@ A minimal working  example of a `~/.tmux.conf` with `tpm` would then be:
 	# Activate the plugins.
 	run -b "~/.tmux/plugins/tpm/tpm"
 
+### Smart-Splits
+
+Although this plugin also provides navigation, as of now, we only support the resizing of splits.
+The default directions used as up/down/left/right are `tvfg`. They might seem random, but on a
+"normal" keyboard, you can see how they can represent the directions 😉.
+
+You to setup the plugin in neovim (see their Website), and then tell `tilish` to enable
+the integration:
+
+	set -g @tilish-smart_splits 'on'
+
+And you can customize the keys (the order is left/down/up/right); for example, the default is:
+
+	set -g @tilish-smart_splits_dirs 'fvtg'
+
 [3]:  https://github.com/christoomey/vim-tmux-navigator
+[4]:  https://github.com/mrjones2014/smart-splits.nvim
 [10]: https://github.com/sunaku/tmux-navigate
 
 # Related projects
