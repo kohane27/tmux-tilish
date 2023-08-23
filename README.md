@@ -161,10 +161,6 @@ set, the default value will be used):
 - `set -g @tilish-refresh "..."` (default <kbd>r</kbd>)
 - `set -g @tilish-rename "..."` (default <kbd>n</kbd>)
 
-*NOTE*: the `rename` option can be disabled if set to `---` like this:
-
-	set -g @tilish-rename '---'
-
 The keybindings that move panes between workspaces assume a US keyboard layout.
 However, you can configure `tilish` for international keyboards by providing a string
 `@tilish-shiftnum` prepared by pressing <kbd>Shift</kbd> +
@@ -176,6 +172,18 @@ For instance, for a UK keyboard, you would configure it as follows:
 Your terminal must support sending keycodes like `M-£` for the above to work.
 For instance, a UK keyboard layout works fine on `urxvt`, but does not work
 by default on `kitty` or `alacritty`, which may require additional configuration.
+
+### Bindings the can be disabled through options
+
+- The `rename` option can be disabled if set to `---` like this:
+
+	set -g @tilish-rename '---'
+
+- The `new_pane` option, which defaults to `Enter` resulting in the combination of
+  <kbd>Alt</kbd> + <kbd>Enter</kbd> to create a new pane,
+  can be disabled if set to `---` like this:
+
+	set -g @tilish-new_pane '---'
 
 ### Auto-refresh hooks
 

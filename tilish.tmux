@@ -76,7 +76,8 @@ for opt in \
 	smart_splits smart_splits_dirs \
 	layout_keys \
 	refresh rename \
-	refresh_hooks; do
+	refresh_hooks \
+	new_pane; do
 	export "$opt"="$(tmux show-option -gv @tilish-"$opt" 2>/dev/null)"
 done
 
@@ -101,6 +102,10 @@ if [ -z "$easymode" ]; then easymode="nn"; fi
 if [ -z "$rename" ]; then
 	rename="n"
 elif [ "$rename" = '---' ]; then rename=''; fi
+
+if [ -z "$new_pane" ]; then
+	new_pane="enter"
+elif [ "$new_pane" = '---' ]; then new_pane=''; fi
 
 # Determine "arrow types" for pane focus.
 if [ "$(char_at $easymode 1)" = "y" ]; then
@@ -223,13 +228,15 @@ else
 	tmux $bind "${mod}${L}" run-shell 'old=`tmux display -p "#{pane_index}"`; tmux select-pane -R; tmux swap-pane -t $old'
 fi
 
-# Open a terminal with Alt + Enter.
-if [ -z "$legacy" ]; then
-	tmux $bind "${mod}enter" \
-		run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -c "$cwd"'
-else
-	tmux $bind "${mod}enter" \
-		select-pane -t 'bottom-right' \\\; split-window \\\; run-shell 'tmux select-layout' \\\; send escape
+# Open a terminal with Alt + <new_pane>
+if [ -n "$new_pane" ]; then
+	if [ -z "$legacy" ]; then
+		tmux $bind "${mod}${new_pane}" \
+			run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -c "$cwd"'
+	else
+		tmux $bind "${mod}${new_pane}" \
+			select-pane -t 'bottom-right' \\\; split-window \\\; run-shell 'tmux select-layout' \\\; send escape
+	fi
 fi
 
 # Name a window with Alt + n (or the key set through the options)
