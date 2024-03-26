@@ -1,25 +1,24 @@
-Table of Contents
-=================
+# Table of Contents
 
 <details>
    <summary>Click to expand</summary>
 
-   * [Tmux Tilish](#tmux-tilish)
-      * [Changes in this fork:](#changes-in-this-fork)
-      * [Why?](#why)
-      * [Quickstart](#quickstart)
-      * [Keybindings](#keybindings)
-         * [Auto-refresh hooks](#auto-refresh-hooks)
-         * [Layout keys](#layout-keys)
-      * [Easy mode](#easy-mode)
-      * [Prefix mode](#prefix-mode)
-      * [Application launcher](#application-launcher)
-      * [Terminal compatibility](#terminal-compatibility)
-      * [Usage inside i3wm](#usage-inside-i3wm)
-      * [Integration with vim](#integration-with-vim)
-         * [Navigate](#navigate)
-         * [Navigator](#navigator)
-   * [Related projects](#related-projects)
+- [Tmux Tilish](#tmux-tilish)
+  - [Changes in this fork:](#changes-in-this-fork)
+  - [Why?](#why)
+  - [Quickstart](#quickstart)
+  - [Keybindings](#keybindings)
+    - [Auto-refresh hooks](#auto-refresh-hooks)
+    - [Layout keys](#layout-keys)
+  - [Easy mode](#easy-mode)
+  - [Prefix mode](#prefix-mode)
+  - [Application launcher](#application-launcher)
+  - [Terminal compatibility](#terminal-compatibility)
+  - [Usage inside i3wm](#usage-inside-i3wm)
+  - [Integration with vim](#integration-with-vim)
+    - [Navigate](#navigate)
+    - [Navigator](#navigator)
+- [Related projects](#related-projects)
 
 </details>
 
@@ -78,12 +77,12 @@ The easiest way to install this plugin is via the [Tmux Plugin Manager][2].
 Just add the following to `~/.tmux.conf`, then press <kbd>Ctrl</kbd> + <kbd>b</kbd>
 followed by <kbd>Shift</kbd> + <kbd>i</kbd> to install it (assuming default prefix key):
 
-	set -g @plugin 'farzadmf/tmux-tilish'
+    set -g @plugin 'farzadmf/tmux-tilish'
 
 For `tmux` v2.7+, you can customize which layout is used as default for new workspaces.
 To do so, add this to `~/.tmux.conf`:
 
-	set -g @tilish-default 'main-vertical'
+    set -g @tilish-default 'main-vertical'
 
 Just replace `main-vertical` with one of the layouts from the `tmux` `man` page:
 
@@ -113,8 +112,8 @@ For further configuration options:
 
 It is also recommended that you add the following to the top of your `.tmux.conf`:
 
-	set -s escape-time 0
-	set -g base-index 1
+    set -s escape-time 0
+    set -g base-index 1
 
 The first line prevents e.g. <kbd>Esc</kbd> + <kbd>h</kbd> from triggering the
 <kbd>Alt</kbd> + <kbd>h</kbd> keybinding, preventing common misbehavior when
@@ -134,30 +133,31 @@ while a "pane" is what `i3wm` would call a "window" and `vim` would call a "spli
 
 NOTE: a bunch of the following keys can be overridden through the options (see below).
 
-| Keybinding                                                                           | Description                                          |
-| ----------                                                                           | -----------                                          |
-| <kbd>Alt</kbd> + <kbd>0</kbd>-<kbd>9</kbd>                                           | Switch to workspace number 0-9                       |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>0</kbd>-<kbd>9</kbd>                        | Move pane to workspace 0-9                           |
-| <kbd>Alt</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd>                    | Move focus left/down/up/right                        |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> | Move pane left/down/up/right                         |
-| <kbd>Alt</kbd> + <kbd>Enter</kbd>                                                    | Create a new pane at "the end" of the current layout |
-| <kbd>Alt</kbd> + <kbd>s</kbd>                                                        | Switch to layout: split then vsplit                  |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>s</kbd>                                     | Switch to layout: only split                         |
-| <kbd>Alt</kbd> + <kbd>v</kbd>                                                        | Switch to layout: vsplit then split                  |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>v</kbd>                                     | Switch to layout: only vsplit                        |
-| <kbd>Alt</kbd> + <kbd>t</kbd>                                                        | Switch to layout: fully tiled                        |
-| <kbd>Alt</kbd> + <kbd>z</kbd>                                                        | Switch to layout: zoom (fullscreen)                  |
-| <kbd>Alt</kbd> + <kbd>r</kbd>                                                        | Refresh current layout                               |
-| <kbd>Alt</kbd> + <kbd>n</kbd>                                                        | Name/rename current window                           |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>q</kbd>                                     | Quit (close) pane                                    |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>e</kbd>                                     | Exit (detach) `tmux`                                   |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>c</kbd>                                     | Reload config                                        |
+| Keybinding                                                                           | Description                                                          |
+| ------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| <kbd>Alt</kbd> + <kbd>0</kbd>-<kbd>9</kbd>                                           | Switch to workspace number 0-9                                       |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>0</kbd>-<kbd>9</kbd>                        | Move pane to workspace 0-9                                           |
+| <kbd>Alt</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd>                    | Move focus left/down/up/right                                        |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> | Move pane left/down/up/right (NOTE: the arrow keys are always bound) |
+| <kbd>Alt</kbd> + <kbd>Enter</kbd>                                                    | Create a new pane at "the end" of the current layout                 |
+| <kbd>Alt</kbd> + <kbd>s</kbd>                                                        | Switch to layout: split then vsplit                                  |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>s</kbd>                                     | Switch to layout: only split                                         |
+| <kbd>Alt</kbd> + <kbd>v</kbd>                                                        | Switch to layout: vsplit then split                                  |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>v</kbd>                                     | Switch to layout: only vsplit                                        |
+| <kbd>Alt</kbd> + <kbd>t</kbd>                                                        | Switch to layout: fully tiled                                        |
+| <kbd>Alt</kbd> + <kbd>z</kbd>                                                        | Switch to layout: zoom (fullscreen)                                  |
+| <kbd>Alt</kbd> + <kbd>r</kbd>                                                        | Refresh current layout                                               |
+| <kbd>Alt</kbd> + <kbd>n</kbd>                                                        | Name/rename current window                                           |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>q</kbd>                                     | Quit (close) pane                                                    |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>e</kbd>                                     | Exit (detach) tmux                                                   |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>c</kbd>                                     | Reload config                                                        |
 
 The <kbd>Alt</kbd> + <kbd>0</kbd> and <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>0</kbd>
 bindings are "smart": depending on `base-index`, they either act on workspace 0 or 10.
 
 The following options can be used to override some keys mentioned in the above table (if they're not
 set, the default value will be used):
+
 - `set -g @tilish-refresh "..."` (default <kbd>r</kbd>)
 - `set -g @tilish-rename "..."` (default <kbd>n</kbd>)
 
@@ -167,7 +167,7 @@ However, you can configure `tilish` for international keyboards by providing a s
 <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd><kbd>5</kbd><kbd>6</kbd><kbd>7</kbd><kbd>8</kbd><kbd>9</kbd><kbd>0</kbd>.
 For instance, for a UK keyboard, you would configure it as follows:
 
-	set -g @tilish-shiftnum '!"£$%^&*()'
+    set -g @tilish-shiftnum '!"£$%^&*()'
 
 Your terminal must support sending keycodes like `M-£` for the above to work.
 For instance, a UK keyboard layout works fine on `urxvt`, but does not work
@@ -177,29 +177,31 @@ by default on `kitty` or `alacritty`, which may require additional configuration
 
 - The `rename` option can be disabled if set to `---` like this:
 
-	set -g @tilish-rename '---'
+  set -g @tilish-rename '---'
 
 - The `new_pane` option, which defaults to `Enter` resulting in the combination of
   <kbd>Alt</kbd> + <kbd>Enter</kbd> to create a new pane,
   can be disabled if set to `---` like this:
 
-	set -g @tilish-new_pane '---'
+  set -g @tilish-new_pane '---'
 
 ### Auto-refresh hooks
 
 By default, we set hooks to auto-refresh the window layout when a pane is created/deleted. The setting can be controlled using
 `@tilish-refresh_hooks`. It's a 2-character (default is `'yy'`):
+
 - First character enables/disables auto-refreshing after a pane is created (`after-split-window`)
 - Second character enables/disables auto-refreshing after a pane is deleted (`pane-exited`)
 
 So, for example, to disable the hooks, we would do something like this:
 
-	set -g @tilish-refresh_hooks 'nn'
+    set -g @tilish-refresh_hooks 'nn'
 
 ### Layout keys
 
 We use some keys to manipulate the window layout. The setting is controlled through the option `@tilish-layout_keys`,
 where the default value is `sSvVtz`, representing the following:
+
 - First character (<kbd>s</kbd>) is used to switch to layout `main-horizontal`
 - Second character (<kbd>S</kbd>) is used to switch to layout `even-vertical`
 - Third character (<kbd>v</kbd>) is used to switch to layout `main-vertical`
@@ -210,11 +212,11 @@ where the default value is `sSvVtz`, representing the following:
 In order to override a key, you need to specify the complete string and only change the ones you desire. For example,
 to use <kbd>i</kbd> and <kbd>I</kbd> instead of <kbd>v</kbd> and <kbd>V</kbd>, respectively, we would do something like this:
 
-	set -g @tilish-layout_keys 'sSiItz'
+    set -g @tilish-layout_keys 'sSiItz'
 
 To disable a key, you can set it to `_`; for example, to disable `mod-t` to switch to tiled layout, we can do:
 
-	set -g @tilish-layout_keys 'sSiI_z'
+    set -g @tilish-layout_keys 'sSiI_z'
 
 ## Easy mode
 
@@ -226,30 +228,32 @@ There's a setting called `tilish_easymode`, consisting of two characters that en
 the "easy mode" for pane focus/movment.
 
 The default value is `'nn'`, which means to use vim-style keybindings for both focus and movement:
+
 - The first character corresponds to pane focus.
 - The second character corresponds to pane movement.
 
 For example, by doing this in `.tmux.conf`:
 
-	set -g @tilish-easymode 'ny'
+    set -g @tilish-easymode 'ny'
 
 we can enable the "easy mode" only for pane movement, which means the revised keybindings for the pane movement then become:
 
 | Keybinding                                                                                                   | Description                  |
-| ----------                                                                                                   | -----------                  |
+| ------------------------------------------------------------------------------------------------------------ | ---------------------------- |
 | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>&#8592;</kbd><kbd>&#8595;</kbd><kbd>&#8593;</kbd><kbd>&#8594;</kbd> | Move pane left/down/up/right |
 
 Or by doing this:
 
-	set -g @tilish-easymode 'yn'
+    set -g @tilish-easymode 'yn'
 
 will enable arrows for pane focus. The revised keybindings for the pane focus then become:
 
 | Keybinding                                                                                | Description                   |
-| ----------                                                                                | -----------                   |
+| ----------------------------------------------------------------------------------------- | ----------------------------- |
 | <kbd>Alt</kbd> + <kbd>&#8592;</kbd><kbd>&#8595;</kbd><kbd>&#8593;</kbd><kbd>&#8594;</kbd> | Move focus left/down/up/right |
 
 ## Prefix mode
+
 Note that this feature is currently only available in `tmux` v2.4+.
 The "prefix mode" uses a prefix key instead of <kbd>Alt</kbd>, and
 may be particularly interesting for users of editors like `kak` and
@@ -257,7 +261,7 @@ may be particularly interesting for users of editors like `kak` and
 define a prefix keybinding in your `tmux.conf`. For instance, to use
 <kbd>Alt</kbd> + <kbd>Space</kbd> as your `tilish` prefix, add:
 
-	set -g @tilish-prefix 'M-space'
+    set -g @tilish-prefix 'M-space'
 
 Actions that would usually be done by <kbd>Alt</kbd> + <kbd>key</kbd>
 are now accomplished by pressing the prefix and then <kbd>key</kbd>.
@@ -276,7 +280,7 @@ The `tmux` option `repeat-time` can be used to customize this timeout.
 Personally, I find the default 500ms timeout somewhat short, and would
 recommend that you increase this to at least a second if you use `tilish`:
 
-	set -g repeat-time 1000
+    set -g repeat-time 1000
 
 ## Application launcher
 
@@ -286,7 +290,7 @@ If you have [`fzf`][5] available on your system, `tilish` can offer a similar
 application launcher using the same keyboard shortcut. To enable this
 functionality, add the following to your `~/.tmux.conf`:
 
-	set -g @tilish-dmenu 'on'
+    set -g @tilish-dmenu 'on'
 
 Basically, pressing <kbd>Alt</kbd>+<kbd>d</kbd> will then pop up a split
 that lets you fuzzy-search through all executables in your system `$PATH`.
@@ -302,20 +306,20 @@ This is currently only available in `tmux` v2.7+.
 Not all terminals support all keybindings. The plugin has been verified
 to work well with: `iTerm2` and `Terminal.app` on macOS; `alacritty`, `kitty`,
 `terminator`, `gnome-terminal`, and `urxvt` on Linux; `wsltty` and `alacritty`
-on Windows.  Some of these terminals bind <kbd>Alt</kbd>+<kbd>Enter</kbd> to
+on Windows. Some of these terminals bind <kbd>Alt</kbd>+<kbd>Enter</kbd> to
 fullscreen, so you have to disable that for the `tilish` "new pane" binding to
-work.  Moreover, `gnome-terminal` steals the "switch workspace" keybindings
-<kbd>Alt</kbd>+<kbd>0</kbd>-<kbd>9</kbd> *if* you open multiple tabs. If you
+work. Moreover, `gnome-terminal` steals the "switch workspace" keybindings
+<kbd>Alt</kbd>+<kbd>0</kbd>-<kbd>9</kbd> _if_ you open multiple tabs. If you
 use macOS, you likely want to configure the `Option` key to send either `Esc+`
 (`iTerm2`) or `Meta` (`Terminal.app`) under the keyboard settings of the app.
 
 If you use `xterm`, almost none of the <kbd>Alt</kbd> keys work by default.
 That can be fixed by adding this to `~/.Xresources`:
 
-	XTerm*eightBitControl: false
-	XTerm*eightBitInput: false
-	XTerm.omitTranslation: fullscreen
-	XTerm*fullscreen: never
+    XTerm*eightBitControl: false
+    XTerm*eightBitInput: false
+    XTerm.omitTranslation: fullscreen
+    XTerm*fullscreen: never
 
 ## Usage inside i3wm
 
@@ -325,7 +329,7 @@ instead of a new terminal pane inside `tmux`. The window manager always takes
 priority — so if both `i3wm` and `tilish` define the same keybinding,
 `i3wm` will intercept the keybinding before `tmux` sees it.
 
-The best way to solve this is perhaps to change your window manager  modifier key
+The best way to solve this is perhaps to change your window manager modifier key
 to <kbd>Super</kbd>, also known as the "Windows key". As described
 [in the `i3wm` user guide](https://i3wm.org/docs/userguide.html#_using_i3), this can
 be done by changing `$mod` to `Mod4` in your `i3wm` config. That way, pressing e.g.
@@ -339,37 +343,37 @@ of <kbd>Alt</kbd>, and is therefore compatible with the default `i3wm` keybindin
 ## Integration with [neo]vim
 
 There are plugins such as:
+
 - [tmux-navigate][10]
 - [vim-tmux-navigator][3]
 - [smart-splits.nvim][4]
-which both allow seamless navigation/resizing between `vim` splits and `tmux` splits.
-The former has an advantage that it also works over `ssh` connections, and that
-it plays better with zooming (<kbd>Alt</kbd>+<kbd>z</kbd>).  If you use either
-plugin, you can tell `tilish` to make it setup the keybindings for you. (If you
-don't, `tilish` will use fallback keybindings that don't integrate with `vim`.)
+  which both allow seamless navigation/resizing between `vim` splits and `tmux` splits.
+  The former has an advantage that it also works over `ssh` connections, and that
+  it plays better with zooming (<kbd>Alt</kbd>+<kbd>z</kbd>). If you use either
+  plugin, you can tell `tilish` to make it setup the keybindings for you. (If you
+  don't, `tilish` will use fallback keybindings that don't integrate with `vim`.)
 
 ### Navigate
 
-It is perhaps easiest to setup `tmux-navigate`. Just load `navigate` *after* `tilish`
+It is perhaps easiest to setup `tmux-navigate`. Just load `navigate` _after_ `tilish`
 in your `tmux.conf`, and set the option `@tilish-navigate` to `on` to integrate them.
 Thus a full working minimal example of a `tpm`-based `tmux.conf` would be:
 
-	# List of plugins.
-	set -g @plugin 'tmux-plugins/tpm'
-	set -g @plugin 'tmux-plugins/tmux-sensible'
-	set -g @plugin 'farzadmf/tmux-tilish'
-	set -g @plugin 'sunaku/tmux-navigate'
+    # List of plugins.
+    set -g @plugin 'tmux-plugins/tpm'
+    set -g @plugin 'tmux-plugins/tmux-sensible'
+    set -g @plugin 'farzadmf/tmux-tilish'
+    set -g @plugin 'sunaku/tmux-navigate'
 
-	# Plugin options.
-	set -g @tilish-navigate 'on'
+    # Plugin options.
+    set -g @tilish-navigate 'on'
 
-	# Install `tpm` if needed.
-	if "test ! -d ~/.tmux/plugins/tpm" \
-	   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
+    # Install `tpm` if needed.
+    if "test ! -d ~/.tmux/plugins/tpm" \
+       "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
 
-	# Activate the plugins.
-	run -b "~/.tmux/plugins/tpm/tpm"
-
+    # Activate the plugins.
+    run -b "~/.tmux/plugins/tpm/tpm"
 
 No further setup is required; `tilish` sets up the keybindings, and `navigate`
 handles seamless navigation of `vim`/`nvim` splits. However, if you also want
@@ -382,31 +386,31 @@ To install `vim-tmux-navigator`, you should first install the plugin for `vim`
 or `nvim`, as described on [their website][3]. Then place this in your
 `~/.config/nvim/init.vim` (`nvim`) or `~/.vimrc` (`vim`):
 
-	noremap <silent> <m-h> :TmuxNavigateLeft<cr>
-	noremap <silent> <m-j> :TmuxNavigateDown<cr>
-	noremap <silent> <m-k> :TmuxNavigateUp<cr>
-	noremap <silent> <m-l> :TmuxNavigateRight<cr>
+    noremap <silent> <m-h> :TmuxNavigateLeft<cr>
+    noremap <silent> <m-j> :TmuxNavigateDown<cr>
+    noremap <silent> <m-k> :TmuxNavigateUp<cr>
+    noremap <silent> <m-l> :TmuxNavigateRight<cr>
 
 You then just have to tell `tilish` that you want the integration:
 
-	set -g @tilish-navigator 'on'
+    set -g @tilish-navigator 'on'
 
-A minimal working  example of a `~/.tmux.conf` with `tpm` would then be:
+A minimal working example of a `~/.tmux.conf` with `tpm` would then be:
 
-	# List of plugins.
-	set -g @plugin 'tmux-plugins/tpm'
-	set -g @plugin 'tmux-plugins/tmux-sensible'
-	set -g @plugin 'jabirali/tmux-tilish'
+    # List of plugins.
+    set -g @plugin 'tmux-plugins/tpm'
+    set -g @plugin 'tmux-plugins/tmux-sensible'
+    set -g @plugin 'jabirali/tmux-tilish'
 
-	# Plugin options.
-	set -g @tilish-navigator 'on'
+    # Plugin options.
+    set -g @tilish-navigator 'on'
 
-	# Install `tpm` if needed.
-	if "test ! -d ~/.tmux/plugins/tpm" \
-	   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
+    # Install `tpm` if needed.
+    if "test ! -d ~/.tmux/plugins/tpm" \
+       "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
 
-	# Activate the plugins.
-	run -b "~/.tmux/plugins/tpm/tpm"
+    # Activate the plugins.
+    run -b "~/.tmux/plugins/tpm/tpm"
 
 ### Smart-Splits
 
@@ -417,14 +421,14 @@ The default directions used as up/down/left/right are `tvfg`. They might seem ra
 You to setup the plugin in neovim (see their Website), and then tell `tilish` to enable
 the integration:
 
-	set -g @tilish-smart_splits 'on'
+    set -g @tilish-smart_splits 'on'
 
 And you can customize the keys (the order is left/down/up/right); for example, the default is:
 
-	set -g @tilish-smart_splits_dirs 'fvtg'
+    set -g @tilish-smart_splits_dirs 'fvtg'
 
-[3]:  https://github.com/christoomey/vim-tmux-navigator
-[4]:  https://github.com/mrjones2014/smart-splits.nvim
+[3]: https://github.com/christoomey/vim-tmux-navigator
+[4]: https://github.com/mrjones2014/smart-splits.nvim
 [10]: https://github.com/sunaku/tmux-navigate
 
 # Related projects

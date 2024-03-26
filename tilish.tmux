@@ -107,6 +107,11 @@ if [ -z "$new_pane" ]; then
 	new_pane="enter"
 elif [ "$new_pane" = '---' ]; then new_pane=''; fi
 
+left_arrow='left'
+down_arrow='down'
+up_arrow='up'
+right_arrow='right'
+
 # Determine "arrow types" for pane focus.
 if [ "$(char_at $easymode 1)" = "y" ]; then
 	# Simplified arrows.
@@ -208,6 +213,13 @@ if [ -z "$legacy" ]; then
 else
 	tmux $bind "${mod}${refresh}" run-shell 'tmux select-layout'\\\; send escape
 fi
+
+# Always do arrows anyways since they're useful
+# (specially for easymode where we can move panes)!
+tmux $bind "${mod}${left_arrow}" select-pane -L
+tmux $bind "${mod}${down_arrow}" select-pane -D
+tmux $bind "${mod}${up_arrow}" select-pane -U
+tmux $bind "${mod}${right_arrow}" select-pane -R
 
 # Switch to pane via Alt + hjkl.
 tmux $bind "${mod}${h}" select-pane -L
