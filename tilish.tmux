@@ -95,12 +95,6 @@ if [ -z "$new_pane" ]; then
     new_pane="enter"
 elif [ "$new_pane" = '---' ]; then new_pane=''; fi
 
-# Determine "arrow types" for pane focus.
-h='h'
-j='j'
-k='k'
-l='l'
-
 # Determine modifier vs. prefix key.
 if [ -z "${prefix:-}" ]; then
     bind='bind -n'
@@ -164,29 +158,6 @@ if [ -n "$new_pane" ]; then
     tmux $bind "${mod}${new_pane}" \
         run-shell 'cwd="`tmux display -p \"#{pane_current_path}\"`"; tmux select-pane -t "bottom-right"; tmux split-pane -c "$cwd"'
 fi
-
-# # Name a window with Alt + n (or the key set through the options)
-# # Will be disabled if set to '---'
-# if [ -n "$rename" ]; then
-#     tmux $bind "${mod}${rename}" \
-#         command-prompt -p 'Window name:' 'rename-window "%%"'
-# fi
-
-# # Close a window with Alt + Shift + q.
-# tmux $bind "${mod}Q" \
-#     if-shell \
-#     '[ "$(tmux display-message -p "#{window_panes}")" -gt 1 ]' \
-#     'kill-pane; select-layout; select-layout -E' \
-#     'kill-pane'
-
-# # Close a connection with Alt + Shift + e.
-# tmux $bind "${mod}E" \
-#     confirm-before -p "Detach from #H:#S? (y/n)" detach-client
-
-# # Reload configuration with Alt + Shift + c.
-# tmux $bind "${mod}C" \
-#     source-file ~/.tmux.conf \\\; display "Reloaded config"
-# }}}
 
 # Define hooks {{{
 if [ -z "$legacy" ]; then
