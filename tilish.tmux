@@ -100,11 +100,6 @@ h='h'
 j='j'
 k='k'
 l='l'
-# Determine "arrow types" for pane movement.
-H='H'
-J='J'
-K='K'
-L='L'
 
 # Determine modifier vs. prefix key.
 if [ -z "${prefix:-}" ]; then
@@ -216,24 +211,5 @@ if [ -z "$legacy" ]; then
         tmux select-layout "$default"
         tmux select-layout -E
     fi
-fi
-# }}}
-
-# Integrate with Vim for transparent navigation {{{
-is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
-
-# Integrate Alt + hjkl with `vim-tmux-navigator`.
-# This assumes that your Neovim is setup to use Alt + hjkl bindings as well.
-
-tmux $bind "${mod}${h}" if-shell "$is_vim" 'send M-h' 'select-pane -L'
-tmux $bind "${mod}${j}" if-shell "$is_vim" 'send M-j' 'select-pane -D'
-tmux $bind "${mod}${k}" if-shell "$is_vim" 'send M-k' 'select-pane -U'
-tmux $bind "${mod}${l}" if-shell "$is_vim" 'send M-l' 'select-pane -R'
-
-if [ -z "$prefix" ]; then
-    tmux bind -T copy-mode-vi "M-$h" select-pane -L
-    tmux bind -T copy-mode-vi "M-$j" select-pane -D
-    tmux bind -T copy-mode-vi "M-$k" select-pane -U
-    tmux bind -T copy-mode-vi "M-$l" select-pane -R
 fi
 # }}}
