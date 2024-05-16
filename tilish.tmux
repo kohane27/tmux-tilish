@@ -159,12 +159,6 @@ layout_key_6=$(char_at $layout_keys 6)
 # Refresh the current layout (e.g. after deleting a pane).
 tmux $bind "${mod}${refresh}" select-layout -E
 
-# Switch to pane via Alt + hjkl.
-tmux $bind "${mod}${h}" select-pane -L
-tmux $bind "${mod}${j}" select-pane -D
-tmux $bind "${mod}${k}" select-pane -U
-tmux $bind "${mod}${l}" select-pane -R
-
 # Open a terminal with Alt + <new_pane>
 if [ -n "$new_pane" ]; then
     tmux $bind "${mod}${new_pane}" \
