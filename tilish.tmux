@@ -59,11 +59,9 @@ legacy="$(tmux -V | grep -E 'tmux (1\.|2\.[0-6])')"
 
 # Read user options.
 for opt in \
-    default dmenu easymode prefix shiftnum \
+    default dmenu prefix shiftnum \
     navigate navigator \
-    smart_splits smart_splits_dirs \
-    layout_keys \
-    refresh rename \
+    refresh \
     refresh_hooks \
     new_pane; do
     export "$opt"="$(tmux show-option -gv @tilish-"$opt" 2>/dev/null)"
@@ -72,9 +70,6 @@ done
 # Default to US keyboard layout, unless something is configured.
 if [ -z "$shiftnum" ]; then
     shiftnum='!@#$%^&*()'
-fi
-if [ -z "$layout_keys" ]; then
-    layout_keys='sSvVtz'
 fi
 
 # Resize hooks are enabled by default
@@ -85,11 +80,6 @@ if [ -z "$refresh_hooks" ]; then
 fi
 
 if [ -z "$refresh" ]; then refresh="r"; fi
-if [ -z "$easymode" ]; then easymode="nn"; fi
-
-if [ -z "$rename" ]; then
-    rename="n"
-elif [ "$rename" = '---' ]; then rename=''; fi
 
 if [ -z "$new_pane" ]; then
     new_pane="enter"
@@ -131,24 +121,6 @@ else
     bind_switch "${mod}0" 0
     bind_move "${mod}$(char_at "$shiftnum" 10)" 0
 fi
-
-# Switch layout with Alt + <mnemonic key>.
-# The keys can be overridden, but the default mnemonics are
-# `s` and `S` for layouts Vim would generate with `:split`, and `v` and `V` for `:vsplit`.
-# The remaining mappings based on `z` and `t` should be quite obvious.
-layout_key_1=$(char_at $layout_keys 1)
-layout_key_2=$(char_at $layout_keys 2)
-layout_key_3=$(char_at $layout_keys 3)
-layout_key_4=$(char_at $layout_keys 4)
-layout_key_5=$(char_at $layout_keys 5)
-layout_key_6=$(char_at $layout_keys 6)
-
-[ $layout_key_1 = '_' ] || bind_layout "${mod}$(char_at $layout_keys 1)" 'main-horizontal'
-[ $layout_key_2 = '_' ] || bind_layout "${mod}$(char_at $layout_keys 2)" 'even-vertical'
-[ $layout_key_3 = '_' ] || bind_layout "${mod}$(char_at $layout_keys 3)" 'main-vertical'
-[ $layout_key_4 = '_' ] || bind_layout "${mod}$(char_at $layout_keys 4)" 'even-horizontal'
-[ $layout_key_5 = '_' ] || bind_layout "${mod}$(char_at $layout_keys 5)" 'tiled'
-[ $layout_key_6 = '_' ] || bind_layout "${mod}$(char_at $layout_keys 6)" 'zoom'
 
 # Refresh the current layout (e.g. after deleting a pane).
 tmux $bind "${mod}${refresh}" select-layout -E
